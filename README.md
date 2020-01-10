@@ -35,6 +35,8 @@ Treasure “宝藏” 顾名思义这是收藏的珍宝，而且它并没有收�
 
 - [Matrix-1](./VulnHub/Matrix-1.md)
 
+- [Matrix-2](./VulnHub/Matrix-2.md)
+
 - [HA:Dhanush](./VulnHub/HA-Dhanush.md)
 
 - [bossplayersCTF](./VulnHub/bossplayersCTF.md)

