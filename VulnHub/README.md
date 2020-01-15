@@ -8,6 +8,8 @@
 
 - [Matrix-2](./Matrix-2.md)
 
+- [Matrix-3](./Matrix-3.md)
+
 - [HA:Dhanush](./HA-Dhanush.md)
 
 - [bossplayersCTF](./bossplayersCTF.md)
