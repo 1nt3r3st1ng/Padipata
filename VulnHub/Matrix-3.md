@@ -52,7 +52,7 @@ dirb http://192.168.56.109:7331/ -u admin:passwd
 
 ![](./img/Matrix3-08.png)
 
-> **发现是DOS文件，使用IDA查看得到 guest:7R1n17yN30 **
+> **发现是DOS文件，使用IDA查看得到 guest:7R1n17yN30**
 
 ![](./img/Matrix3-09.png)
 
